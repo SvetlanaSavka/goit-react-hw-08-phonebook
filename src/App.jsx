@@ -1,20 +1,26 @@
 import { ToastContainer } from 'react-toastify';
-import { Container } from 'components/Container/Container.styled';
-import ContactForm from 'components/ContactForm/ContactForm';
-import ContactList from 'components/ContactList/ContactList';
-import Filter from 'components/Filter/Filter';
+import { Route, Routes } from 'react-router-dom';
+//import { lazy } from 'react';
+import SharedLayout from 'loyaut/SharedLayout';
+
+/* const Login = lazy(() => import('components/Login/Login'));
+const Register = lazy(() => import('components/Register/Register')); */
 
 export const App = () => {
   return (
     <>
-      <Container>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </Container>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          {/* <Route path="/contacts" element={<div>Contacts</div>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} /> */}
+        </Route>
+      </Routes>
+
       <ToastContainer />
     </>
   );
 };
+
+//<PrivetRout path="/contacts"><Contacts/></PrivetRout>;
+//<PublicRout></PublicRout>;

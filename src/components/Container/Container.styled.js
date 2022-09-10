@@ -1,11 +1,18 @@
-import styled from 'styled-components';
+/* import styled from 'styled-components';
 
 export const Container = styled.div`
-  justify-self: center;
-  width: 600px;
-  padding: 32px;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px #ccc;
-  font-family: sans-serif;
-  letter-spacing: 1px;
+  height: 80px;
+  text-align: center;
+  box-shadow: 10px 5px 5px lightgray;
 `;
+
+export const Link = styled(NavLink)`
+  color: black;
+  margin-left: 30px;
+  font-family: serif;
+  font-size: 50px;
+  :hover {
+    color: tomato;
+  }
+`;
+ */

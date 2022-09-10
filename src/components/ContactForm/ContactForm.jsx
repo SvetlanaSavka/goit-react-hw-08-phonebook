@@ -9,7 +9,9 @@ import {
   ContactFormField,
   Formcontactlabel,
 } from './ContactForm.styled';
-import { getContacts, addContactAsync } from 'redux/contactsSlice';
+//import { getContacts, addContactAsync } from 'redux/auth/authSlice';
+import contactSelectors from 'redux/contacts/contact-selectors';
+import { addContact } from 'redux/contacts/contacts-operations';
 
 const schema = yup.object().shape({
   name: yup
@@ -33,7 +35,7 @@ const schema = yup.object().shape({
 });
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(contactSelectors.getContacts);
   const dispatch = useDispatch();
 
   const validationData = data =>
@@ -51,7 +53,7 @@ export const ContactForm = () => {
       name: data.name,
       number: data.number,
     };
-    dispatch(addContactAsync(contact));
+    dispatch(addContact(contact));
   };
   const handleSubmit = (values, { resetForm }) => {
     addContacts(values);

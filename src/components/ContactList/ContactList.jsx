@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Link, Span } from './ContactList.styled';
+import contactSelectors from 'redux/contacts/contact-selectors';
 import {
-  getContacts,
-  getFilter,
-  deleteContactAsync,
-  getContactsAsync,
-} from 'redux/contactsSlice';
+  fetchContacts,
+  deleteContact,
+} from 'redux/contacts/contacts-operations';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(contactSelectors.getContacts);
+  const filter = useSelector(contactSelectors.getFilter);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContactsAsync());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   const getVisibleContacts = () => {
@@ -25,7 +24,7 @@ const ContactList = () => {
     );
   };
   const deleteContactId = id => {
-    dispatch(deleteContactAsync(id));
+    dispatch(deleteContact(id));
   };
 
   return (
