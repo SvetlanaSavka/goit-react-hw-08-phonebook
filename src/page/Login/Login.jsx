@@ -12,20 +12,22 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
+    console.log(values);
     dispatch(authOperations.logIn(values));
+
     resetForm();
   };
 
   return (
     <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmit}>
       <Formcontact autoComplete="off">
-        <Formcontactlabel htmlFor="user-password">Password</Formcontactlabel>
-        <ContactFormField type="text" name="password" id="user-password" />
-        <ErrorMessage name="password" />
-
         <Formcontactlabel htmlFor="email">Email</Formcontactlabel>
-        <ContactFormField type="tel" name="email" />
+        <ContactFormField type="text" name="email" />
         <ErrorMessage name="email" />
+
+        <Formcontactlabel htmlFor="password">Password</Formcontactlabel>
+        <ContactFormField type="tel" name="password" />
+        <ErrorMessage name="password" />
 
         <ButtononClick type="submit">Login</ButtononClick>
       </Formcontact>

@@ -6,6 +6,10 @@ export const Formcontact = styled(Form)`
   flex-direction: column;
   padding: 12px;
   width: 470px;
+  :hover {
+    background-color: lightgrey;
+  }
+
   border-radius: 2px;
   margin-bottom: 6px;
 `;
@@ -13,7 +17,7 @@ export const Formcontact = styled(Form)`
 export const Formcontactlabel = styled.label`
   display: inline-block;
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 14px;
   font-family: sans-serif;
   cursor: pointer;
   color: black;

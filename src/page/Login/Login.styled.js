@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Form, Field /* ErrorMessage */ } from 'formik';
+import { Form, Field } from 'formik';
 
 export const Formcontact = styled(Form)`
   display: flex;
@@ -8,15 +8,22 @@ export const Formcontact = styled(Form)`
   width: 470px;
   border-radius: 2px;
   margin-bottom: 6px;
+  :hover {
+    background-color: lightgrey;
+  }
 `;
 
 export const Formcontactlabel = styled.label`
   display: inline-block;
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 14px;
   font-family: sans-serif;
   cursor: pointer;
-  color: black;
+  color: ${({ theme }) => theme.colors.primaryShade2};
+
+  /* :focus {
+    background-color: ${({ theme }) => theme.colors.primaryShade2};
+  } */
 `;
 
 export const ButtononClick = styled.button`
@@ -41,3 +48,11 @@ export const ContactFormField = styled(Field)`
   border-radius: 4px;
   height: 26px;
 `;
+
+/* export const Formcontact = styled(Form)`
+  width: 500px;
+  margin: 0 auto;
+`;
+export const ButtononClick = styled.button`
+  width: 100%;
+`; */
