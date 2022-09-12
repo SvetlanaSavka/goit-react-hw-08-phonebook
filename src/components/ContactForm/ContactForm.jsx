@@ -9,7 +9,6 @@ import {
   ContactFormField,
   Formcontactlabel,
 } from './ContactForm.styled';
-//import { getContacts, addContactAsync } from 'redux/auth/authSlice';
 import contactSelectors from 'redux/contacts/contact-selectors';
 import { addContact } from 'redux/contacts/contacts-operations';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Form, Field /* ErrorMessage */ } from 'formik';
+import { Form, Field } from 'formik';
 
 export const Formcontact = styled(Form)`
   display: flex;
@@ -20,7 +20,7 @@ export const Formcontactlabel = styled.label`
   font-size: 14px;
   font-family: sans-serif;
   cursor: pointer;
-  color: black;
+  color: ${({ theme }) => theme.colors.primaryShade2};
 `;
 
 export const ButtononClick = styled.button`

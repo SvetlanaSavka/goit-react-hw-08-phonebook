@@ -18,14 +18,19 @@ const StyledNavLink = styled(NavLink)`
     color: purple;
   }
 `;
-/*  ${({ theme }) => theme.colors.tertiaryShade2}; */
+
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
   return (
     <nav>
-      {isLoggedIn && <StyledNavLink to="/contacts">PhoneBook</StyledNavLink>}
-      <StyledNavLink to="/login">Login</StyledNavLink>
-      <StyledNavLink to="/register">Register</StyledNavLink>
+      {isLoggedIn ? (
+        <StyledNavLink to="/contacts">PhoneBook</StyledNavLink>
+      ) : (
+        <>
+          <StyledNavLink to="/login">Login</StyledNavLink>
+          <StyledNavLink to="/register">Register</StyledNavLink>
+        </>
+      )}
     </nav>
   );
 };

@@ -20,10 +20,6 @@ export const Formcontactlabel = styled.label`
   font-family: sans-serif;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.primaryShade2};
-
-  /* :focus {
-    background-color: ${({ theme }) => theme.colors.primaryShade2};
-  } */
 `;
 
 export const ButtononClick = styled.button`

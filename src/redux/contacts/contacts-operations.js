@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { getContacts, postContact, removeContact } from 'api/fetchContact';
 import {
   addContactError,
   addContactRequest,
@@ -14,7 +14,7 @@ import {
 export const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
   try {
-    const { data } = await axios.get('/contacts');
+    const { data } = await getContacts();
     dispatch(fetchContactsSuccess(data));
   } catch (error) {
     dispatch(fetchContactsError(error.message));
@@ -24,7 +24,7 @@ export const fetchContacts = () => async dispatch => {
 export const addContact = contact => async dispatch => {
   dispatch(addContactRequest());
   try {
-    const { data } = await axios.post('/contacts', contact);
+    const { data } = await postContact(contact);
     dispatch(addContactSuccess(data));
   } catch (error) {
     dispatch(addContactError(error.message));
@@ -33,10 +33,7 @@ export const addContact = contact => async dispatch => {
 
 export const deleteContact = id => async dispatch => {
   dispatch(deleteContactRequest());
-  try {
-    const { data } = await axios.delete(`/contacts/${id}`);
-    dispatch(deleteContactSuccess(data));
-  } catch (error) {
-    dispatch(deleteContactError(error.message));
-  }
+  removeContact(id)
+    .then(() => dispatch(deleteContactSuccess(id)))
+    .catch(error => dispatch(deleteContactError(error.message)));
 };

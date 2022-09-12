@@ -13,10 +13,10 @@ export const Formcontact = styled(Form)`
 export const Formcontactlabel = styled.label`
   display: inline-block;
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 14px;
   font-family: sans-serif;
   cursor: pointer;
-  color: black;
+  color: ${({ theme }) => theme.colors.primaryShade2};
 `;
 
 export const ButtononClick = styled.button`
