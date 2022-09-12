@@ -52,9 +52,7 @@ const fetchCurrentUser = createAsyncThunk(
     try {
       const { data } = await fetchCurrent();
       return data;
-    } catch (error) {
-      // TODO: Добавить обработку ошибки error.message
-    }
+    } catch (error) {}
   }
 );
 

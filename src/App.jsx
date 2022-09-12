@@ -1,18 +1,20 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
-import SharedLayout from 'loyaut/SharedLayout';
-import PrivateRoute from 'components/PrivatRout/PrivatRout';
-import PublicRoute from 'components/PublicRout/PublicRout';
+import { Suspense, lazy } from 'react';
+//import { Outlet } from 'react-router-dom';
+//import SharedLayout from 'layout/SharedLayout';
+import PrivateRoute from 'routes/PrivateRoute';
+import PublicRoute from 'routes/PublicRoute';
 
-const Contacts = lazy(() => import('page/Contacts/Contacts'));
-const Login = lazy(() => import('page/Login/Login'));
-const Register = lazy(() => import('page/Register/Register'));
+const SharedLayout = lazy(() => import('layout/SharedLayout'));
+const Contacts = lazy(() => import('pages/Contacts/Contacts'));
+const Login = lazy(() => import('pages/Login/Login'));
+const Register = lazy(() => import('pages/Register/Register'));
 
 export const App = () => {
   return (
-    <>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route
@@ -21,6 +23,7 @@ export const App = () => {
               <PrivateRoute redirectTo="/login" component={<Contacts />} />
             }
           />
+
           <Route
             path="/login"
             element={
@@ -45,6 +48,6 @@ export const App = () => {
       </Routes>
 
       <ToastContainer />
-    </>
+    </Suspense>
   );
 };

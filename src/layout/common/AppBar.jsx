@@ -1,6 +1,6 @@
 import { Navigation } from './Navigation';
 import styled from 'styled-components';
-import { UserMenu } from 'components/UserMenu/UserMenu';
+import { UserMenu } from 'layout/common/UserMenu';
 import { useAuth } from 'hooks/useAuth';
 
 const StyledHeader = styled.div`

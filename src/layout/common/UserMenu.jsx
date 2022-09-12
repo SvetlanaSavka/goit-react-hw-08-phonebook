@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import authOperations from 'redux/auth/auth-operation';
+import authOperations from 'redux/auth/auth-operations';
 import { useAuth } from 'hooks/useAuth';
 import styled from 'styled-components';
 

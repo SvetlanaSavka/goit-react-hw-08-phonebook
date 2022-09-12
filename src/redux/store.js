@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import contactsReducer from './contacts/contact-reducer';
 import { persistStore, persistReducer } from 'redux-persist';
 import { middleware } from './middleware';
-import authReducer from './auth/authSlice';
+import authReducer from './auth/auth-slice';
 
 const persistConfig = {
   key: 'contacts',
