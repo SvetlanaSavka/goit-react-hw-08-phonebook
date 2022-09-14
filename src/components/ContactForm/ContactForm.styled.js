@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Form, Field /* ErrorMessage */ } from 'formik';
+import PhoneInput from 'react-phone-input-2';
 
-export const Formcontact = styled(Form)`
+export const Formcontact = styled.form`
   display: flex;
   flex-direction: column;
   padding: 12px;
@@ -34,10 +34,26 @@ export const ButtononClick = styled.button`
   }
 `;
 
-export const ContactFormField = styled(Field)`
-  margin-left: 20px;
-  display: inline-block;
-  border-width: 2px;
-  border-radius: 4px;
-  height: 26px;
+export const ContactFormField = styled.input`
+  color: darkblue;
+  font-size: 16px;
+  margin-left: 10px;
+  background: #ffffff;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  line-height: 25px;
+  height: 35px;
+  width: 295px;
+  outline: none;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const PhoneInputStyled = styled(PhoneInput)`
+  width: 300px !important;
 `;

@@ -27,11 +27,12 @@ export const addContact = contact => async dispatch => {
   try {
     const { data } = await postContact(contact);
     toast.success(`${data.name} was added`);
-    const response = await getContacts();
-    dispatch(addContactSuccess(response.data));
   } catch (error) {
     dispatch(addContactError(error.message));
     toast.error(error.message);
+  } finally {
+    const response = await getContacts();
+    dispatch(addContactSuccess(response.data));
   }
 };
 
@@ -40,10 +41,11 @@ export const deleteContact = id => async dispatch => {
   try {
     await removeContact(id);
     toast.success('Contact was deleted');
-    const { data } = await getContacts();
-    dispatch(deleteContactSuccess(data));
   } catch (error) {
     dispatch(deleteContactError(error.message));
     toast.error(error.message);
+  } finally {
+    const { data } = await getContacts();
+    dispatch(deleteContactSuccess(data));
   }
 };

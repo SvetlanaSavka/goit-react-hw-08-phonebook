@@ -1,82 +1,73 @@
 import React from 'react';
-import { Formik, ErrorMessage } from 'formik';
-import * as yup from 'yup';
+import { useFormik } from 'formik';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
+
+import 'react-phone-input-2/lib/style.css';
 import {
   Formcontact,
   ButtononClick,
   ContactFormField,
   Formcontactlabel,
+  InputContainer,
+  PhoneInputStyled,
 } from './ContactForm.styled';
 import contactSelectors from 'redux/contacts/contact-selectors';
 import { addContact } from 'redux/contacts/contacts-operations';
-
-const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required()
-    .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, {
-      message:
-        "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
-    }),
-
-  number: yup
-    .string()
-    .required()
-    .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-      {
-        message:
-          'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
-      }
-    ),
-});
 
 export const ContactForm = () => {
   const contacts = useSelector(contactSelectors.getContacts);
   const dispatch = useDispatch();
 
+  const formik = useFormik({
+    initialValues: { number: '', name: '' },
+    onSubmit: (values, { resetForm }) => {
+      const isAdded = validationData(values);
+      if (isAdded) {
+        alert(`${values.name} уже добавлен`);
+        return;
+      }
+
+      const contact = {
+        id: nanoid(),
+        name: values.name,
+        number: values.number,
+      };
+      dispatch(addContact(contact));
+      resetForm();
+    },
+  });
+
   const validationData = data =>
     contacts.find(contact => contact.name === data.name);
 
-  const addContacts = data => {
-    const isAdded = validationData(data);
-    if (isAdded) {
-      alert(`${data.name} уже добавлен`);
-      return;
-    }
-
-    const contact = {
-      id: nanoid(),
-      name: data.name,
-      number: data.number,
-    };
-    dispatch(addContact(contact));
-  };
-  const handleSubmit = (values, { resetForm }) => {
-    addContacts(values);
-    resetForm();
-  };
-
   return (
-    <Formik
-      initialValues={{ number: '', name: '' }}
-      validationSchema={schema}
-      onSubmit={handleSubmit}
-    >
-      <Formcontact autoComplete="off">
+    <Formcontact autoComplete="off" onSubmit={formik.handleSubmit}>
+      <InputContainer>
         <Formcontactlabel htmlFor="user-name">Name</Formcontactlabel>
-        <ContactFormField type="text" name="name" id="user-name" />
-        <ErrorMessage name="name" />
-
+        <ContactFormField
+          type="text"
+          name="name"
+          id="user-name"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+        />
+      </InputContainer>
+      <InputContainer>
         <Formcontactlabel htmlFor="number">Number</Formcontactlabel>
-        <ContactFormField type="tel" name="number" />
-        <ErrorMessage name="number" />
 
-        <ButtononClick type="submit">Add contact</ButtononClick>
-      </Formcontact>
-    </Formik>
+        <PhoneInputStyled
+          name="number"
+          formik={formik}
+          country={'us'}
+          id="number"
+          value={formik.values.number}
+          onChange={phone => formik.setFieldValue('number', phone)}
+        />
+      </InputContainer>
+
+      <ButtononClick type="submit">Add contact</ButtononClick>
+    </Formcontact>
   );
 };
 
